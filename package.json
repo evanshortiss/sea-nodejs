@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-sea-openshift",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "bundle": "browserify build/index.js --node -o build/bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "browserify": "^17.0.0",
+    "postject": "^1.0.0-alpha.5",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "env-var": "^7.3.0"
+  }
+}
