@@ -23,4 +23,4 @@ WORKDIR /usr/src/app
 
 COPY --chown=1001:1001 --from=builder /usr/src/app/sea .
 RUN ls
-CMD ['/usr/src/app/sea']
+CMD ./sea
