@@ -1,6 +1,12 @@
-import { readFileSync } from 'fs'
 import { createServer } from 'http'
 import {getConfig} from './config'
+
+['SIGTERM', 'SIGINT'].forEach(sig => {
+  process.on(sig, () => {
+    console.log(`Exiting due to signal "${sig}"`)
+    process.exit(0)
+  })
+})
 
 const { HTTP_HOST, HTTP_PORT} = getConfig(process.env)
 
