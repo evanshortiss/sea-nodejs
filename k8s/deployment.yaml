@@ -1,0 +1,50 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sea-nodejs  
+  labels:
+    app: sea-nodejs
+    app.kubernetes.io/component: sea-nodejs
+    app.kubernetes.io/instance: sea-nodejs
+    app.kubernetes.io/name: sea-nodejs
+    app.openshift.io/runtime: nodejs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sea-nodejs
+  template:
+    metadata:
+      labels:
+        app: sea-nodejs
+        deployment: sea-nodejs
+      annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
+    spec:
+      containers:
+        - name: sea-nodejs
+          image: quay.io/evanshortiss/sea-nodejs-example:latest
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              memory: 200Mi
+              cpu: 1
+            requests:
+              memory: 100Mi
+              cpu: 250m
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+      imagePullSecrets: []
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+  paused: false
